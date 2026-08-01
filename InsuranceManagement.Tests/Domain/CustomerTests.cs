@@ -2,7 +2,7 @@ using FluentAssertions;
 using InsuranceManagementService.Domain.Common;
 using InsuranceManagementService.Domain.Entities;
 
-namespace InsuranceManagement.Tests.Models;
+namespace InsuranceManagement.Tests.Domain;
 
 public class CustomerTests
 {

@@ -3,7 +3,7 @@ using InsuranceManagementService.Domain.Common;
 using InsuranceManagementService.Domain.Entities;
 using InsuranceManagementService.Domain.ValueObjects;
 
-namespace InsuranceManagement.Tests.Models;
+namespace InsuranceManagement.Tests.Domain;
 
 public class ValueObjectTests
 {

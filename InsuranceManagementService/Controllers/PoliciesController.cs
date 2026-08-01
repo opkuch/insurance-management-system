@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InsuranceManagementService.Controllers;
 
 [ApiController]
+[Route("api/policies")]
 [Produces("application/json")]
 public sealed class PoliciesController : ControllerBase
 {
@@ -15,7 +16,7 @@ public sealed class PoliciesController : ControllerBase
     public PoliciesController(IPolicyService policies) => _policies = policies;
 
     /// <summary>Issues a new policy to an existing, active customer.</summary>
-    [HttpPost("api/customers/{customerId:guid}/policies")]
+    [HttpPost("~/api/customers/{customerId:guid}/policies")]
     [ProducesResponseType(typeof(PolicyDetailResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -31,7 +32,7 @@ public sealed class PoliciesController : ControllerBase
     }
 
     /// <summary>Retrieves a policy with its coverages and full transaction history.</summary>
-    [HttpGet("api/policies/{id:guid}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(PolicyDetailResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<PolicyDetailResponse>> GetById(Guid id, CancellationToken cancellationToken)
@@ -41,7 +42,7 @@ public sealed class PoliciesController : ControllerBase
     }
 
     /// <summary>Lists policies, filterable by line of business, status, and customer.</summary>
-    [HttpGet("api/policies")]
+    [HttpGet]
     [ProducesResponseType(typeof(PagedResult<PolicySummaryResponse>), StatusCodes.Status200OK)]
     public async Task<ActionResult<PagedResult<PolicySummaryResponse>>> List(
         [FromQuery] ProductType? productType,
@@ -61,7 +62,7 @@ public sealed class PoliciesController : ControllerBase
     }
 
     /// <summary>Lists every policy belonging to a specific customer.</summary>
-    [HttpGet("api/customers/{customerId:guid}/policies")]
+    [HttpGet("~/api/customers/{customerId:guid}/policies")]
     [ProducesResponseType(typeof(IReadOnlyList<PolicySummaryResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IReadOnlyList<PolicySummaryResponse>>> ListByCustomer(
@@ -73,7 +74,7 @@ public sealed class PoliciesController : ControllerBase
     }
 
     /// <summary>Applies a mid-term change (endorsement) to a policy.</summary>
-    [HttpPatch("api/policies/{id:guid}")]
+    [HttpPatch("{id:guid}")]
     [ProducesResponseType(typeof(PolicyDetailResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,7 +89,7 @@ public sealed class PoliciesController : ControllerBase
     }
 
     /// <summary>Cancels a policy before the end of its term.</summary>
-    [HttpPost("api/policies/{id:guid}/cancel")]
+    [HttpPost("{id:guid}/cancel")]
     [ProducesResponseType(typeof(PolicyDetailResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
