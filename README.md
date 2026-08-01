@@ -38,7 +38,7 @@ Ports come from `InsuranceManagementService/Properties/launchSettings.json` (HTT
 dotnet test
 ```
 
-Domain unit tests live under `InsuranceManagement.Tests/Models`. API integration tests
+Domain unit tests live under `InsuranceManagement.Tests/Domain`. API integration tests
 (`WebApplicationFactory` + in-memory SQLite) live under `InsuranceManagement.Tests/Integration`.
 
 ---
